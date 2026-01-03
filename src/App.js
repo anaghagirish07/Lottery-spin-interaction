@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./App.css";
+import Header from "./Components/Header";
+import Slot from "./Components/Slot/Slot";
+import SpinButton from "./Components/SpinButton";
 
 const DIGITS = Array.from({ length: 40 }, (_, i) => i % 10);
 const SLOT_HEIGHT = 120;
@@ -47,40 +50,22 @@ export default function App() {
 
   return (
     <div className="screen">
-      {showPrize && <h1 className="title">CONGRATULATIONS</h1>}
-      {showPrize && <h2 className="prize-text">1st Prize</h2>}
+      <Header showPrize={showPrize} />
 
       <div className="slot-container">
         {positions.map((pos, index) => (
-          <div className="slot" key={index}>
-            <div
-              className="slot-inner"
-              style={{
-                transform: `translateY(-${pos * SLOT_HEIGHT}px)`,
-                transition: spinning
-                  ? `transform ${
-                      1.2 + index * 0.4
-                    }s cubic-bezier(0.1, 0.6, 0.2, 1)`
-                  : "none",
-              }}
-            >
-              {DIGITS.map((num, i) => (
-                <div className="digit" key={i}>
-                  {num}
-                </div>
-              ))}
-            </div>
-          </div>
+          <Slot
+            key={index}
+            position={pos}
+            index={index}
+            spinning={spinning}
+            digits={DIGITS}
+            slotHeight={SLOT_HEIGHT}
+          />
         ))}
       </div>
 
-      <button
-        className="spin-btn"
-        onClick={spin}
-        disabled={spinning || disableSpin}
-      >
-        {spinning ? "SPINNING..." : "SPIN"}
-      </button>
+      <SpinButton spinning={spinning} disableSpin={disableSpin} onSpin={spin} />
     </div>
   );
 }
