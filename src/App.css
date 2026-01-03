@@ -1,38 +1,133 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  font-family: "Orbitron", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #3a0a7a, #0b0218);
+  color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.screen {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.title {
+  font-size: 42px;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  color: #59f6ff;
+  text-shadow: 0 0 18px #59f6ff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.prize-text {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    color: #ffffff;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    color: #ff2e2e;
   }
+}
+
+.slot-container {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #4b008a, #22003d);
+  box-shadow: 0 0 35px rgba(150, 0, 255, 0.7),
+    inset 0 0 30px rgba(120, 0, 255, 0.4);
+}
+
+.slot {
+  position: relative;
+  width: 80px;
+  height: 120px;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(120, 60, 255, 0.55),
+    rgba(40, 0, 80, 0.95)
+  );
+  border: 1px solid #8f5bff;
+  box-shadow: 0 0 20px rgba(143, 91, 255, 0.9), 0 0 40px rgba(143, 91, 255, 0.6),
+    inset 0 0 0 1.5px rgba(202, 167, 255, 0.8);
+  border-radius: 12px;
+}
+
+.slot-inner {
+  transition: transform 0.6s cubic-bezier(0.15, 0.85, 0.35, 1);
+}
+
+.digit {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
+  font-weight: bold;
+  color: #9ffbff;
+  text-shadow: 0 0 10px #5efcff, 0 0 20px rgba(94, 252, 255, 0.9);
+}
+.slot::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 90px;
+  height: 22px;
+
+  background: radial-gradient(
+    circle,
+    rgba(170, 120, 255, 0.9),
+    rgba(120, 60, 255, 0.4),
+    transparent 70%
+  );
+  filter: blur(6px);
+}
+
+.spin-btn {
+  margin-top: 45px;
+  padding: 18px 90px;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ffe600;
+  background: linear-gradient(180deg, #6b2cff, #3a0a7a);
+  border: 2px solid #a97bff;
+  border-radius: 18px;
+  box-shadow: 0 0 25px rgba(143, 91, 255, 0.9), 0 0 50px rgba(143, 91, 255, 0.6),
+    inset 0 0 12px rgba(255, 255, 255, 0.25);
+  text-shadow: 0 0 8px rgba(255, 230, 0, 1), 0 0 16px rgba(255, 230, 0, 0.8);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.spin-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+
+  box-shadow: 0 0 35px rgba(143, 91, 255, 1), 0 0 70px rgba(143, 91, 255, 0.9),
+    inset 0 0 16px rgba(255, 255, 255, 0.35);
+}
+
+.spin-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
